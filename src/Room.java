@@ -4,6 +4,9 @@ import java.util.ArrayList;
 public class Room {
 
     private ArrayList<Wall> wallList;
+    private static int roomCount;
+    private int roomNum;
+    
 
     public Room(double length, double width, double height) throws BadWidthException, BadHeightException {
         wallList = new ArrayList<Wall>();
@@ -16,6 +19,8 @@ public class Room {
         wallList.add(wallC);
         Wall wallD = new Wall(width, height);
         wallList.add(wallD);
+        roomCount++;
+        roomNum = roomCount;
     }
 
     public double getArea() {
@@ -27,5 +32,13 @@ public class Room {
         }
 
         return area;
+    }
+    @Override
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder("Room: ");
+        sb.append(roomNum).append("\nArea: ").append(getArea()).append("\n");
+        
+        return sb.toString();
     }
 }
