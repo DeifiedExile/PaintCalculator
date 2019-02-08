@@ -1,3 +1,5 @@
+package paintcalculator;
+
 
 public class Wall {
 

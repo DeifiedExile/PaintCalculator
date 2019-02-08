@@ -1,3 +1,5 @@
+package paintcalculator;
+
 
 import java.util.ArrayList;
 
