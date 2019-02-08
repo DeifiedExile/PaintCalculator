@@ -1,13 +1,14 @@
 package paintcalculator;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Room {
+public class Room implements Serializable {
 
     private ArrayList<Wall> wallList;
     private static int roomCount;
-    private int roomNum;
+    private transient int roomNum;
     
 
     public Room(double length, double width, double height) throws BadWidthException, BadHeightException {

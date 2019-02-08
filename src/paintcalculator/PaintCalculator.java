@@ -2,6 +2,8 @@ package paintcalculator;
 
 
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,11 +13,11 @@ public class PaintCalculator {
     private List<Room> roomList = new ArrayList<Room>();
     private Scanner keyboard;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
         new PaintCalculator();
     }
 
-    public PaintCalculator() {
+    public PaintCalculator() throws IOException, FileNotFoundException, ClassNotFoundException {
         keyboard = new Scanner(System.in);
 
         int option = 0;
@@ -31,10 +33,10 @@ public class PaintCalculator {
                         createRoom();
                         break;
                     case 2:
-                        // writeFile();
+                        writeFile();
                         break;
                     case 3:
-                        // readFile();
+                        readFile();
                         break;
                     case 4:
                         printRooms();
@@ -50,6 +52,15 @@ public class PaintCalculator {
 
     }
 
+    private void writeFile() throws IOException
+    {
+        RoomWriter writer = new RoomWriter();
+        writer.writeRooms("rooms.dat", roomList);
+    }
+    private void readFile() throws IOException, FileNotFoundException, ClassNotFoundException
+    {
+        roomList = RoomReader.readRooms("rooms.dat");
+    }
     private void printRooms() {
         if (roomList.isEmpty()) {
             System.out.println("No rooms yet");
