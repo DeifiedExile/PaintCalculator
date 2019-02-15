@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class PaintCalculator {
 
-    private List<Room> roomList = new ArrayList<Room>();
+    private List<Paintable> paintableList = new ArrayList<Paintable>();
     private Scanner keyboard;
 
     public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
@@ -33,15 +33,18 @@ public class PaintCalculator {
                         createRoom();
                         break;
                     case 2:
-                        writeFile();
+                        createFence();
                         break;
                     case 3:
-                        readFile();
+                        writeFile();
                         break;
                     case 4:
-                        printRooms();
+                        readFile();
                         break;
                     case 5:
+                        printRooms();
+                        break;                
+                    case 6:
                         System.out.println("Goodbye");
                         System.exit(0);
                 }
@@ -51,33 +54,39 @@ public class PaintCalculator {
         }
 
     }
+    private void createFence()
+    {
+        Fence f = new Fence();
+        paintableList.add(f);
+    }
 
     private void writeFile() throws IOException
     {
         RoomWriter writer = new RoomWriter();
-        writer.writeRooms("rooms.dat", roomList);
+        writer.writePaintable("rooms.dat", paintableList);
     }
     private void readFile() throws IOException, FileNotFoundException, ClassNotFoundException
     {
-        roomList = RoomReader.readRooms("rooms.dat");
+        paintableList = RoomReader.readPaintable("rooms.dat");
     }
     private void printRooms() {
-        if (roomList.isEmpty()) {
+        if (paintableList.isEmpty()) {
             System.out.println("No rooms yet");
         }
 
-        for (Room room : roomList) {
-            System.out.println(room.toString());
+        for (Paintable item : paintableList) {
+            System.out.println(item.toString());
         }
     }
 
     private void printMenu() {
         System.out.println();
         System.out.println("1. Add room");
-        System.out.println("2. Write rooms to file");
-        System.out.println("3. Read rooms from file");
-        System.out.println("4. View rooms");
-        System.out.println("5. Exit");
+        System.out.println("2. Add fence");
+        System.out.println("3. Write rooms to file");
+        System.out.println("4. Read rooms from file");
+        System.out.println("5. View rooms");
+        System.out.println("6. Exit");
         System.out.println();
     }
 
@@ -98,7 +107,7 @@ public class PaintCalculator {
 
         try {
             Room room = new Room(length, width, height);
-            roomList.add(room);
+            paintableList.add(room);
 
             System.out.println("Room successfully created");
         } catch (BadWidthException | BadHeightException e) {

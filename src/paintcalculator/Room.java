@@ -1,14 +1,14 @@
 package paintcalculator;
 
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Room implements Serializable {
+public class Room implements Paintable {
 
     private ArrayList<Wall> wallList;
     private static int roomCount;
     private transient int roomNum;
+    private static final int SQUARE_FEET_PER_GALLON = 400;
     
 
     public Room(double length, double width, double height) throws BadWidthException, BadHeightException {
@@ -41,7 +41,23 @@ public class Room implements Serializable {
     {
         StringBuilder sb = new StringBuilder("Room: ");
         sb.append(roomNum).append("\nArea: ").append(getArea()).append("\n");
+        sb.append("Premium paint cost: $").append(getPremiumCost()).append("\n");
+        sb.append("Standard Paint cost: $").append(getStandardCost()).append("\n");
         
         return sb.toString();
+    }
+    @Override
+    public double getPremiumCost()
+    {
+        double cost = getArea() / SQUARE_FEET_PER_GALLON * PREMIUM_PAINT_COST_PER_GALLON;
+        
+        return cost;
+    }
+    @Override
+    public double getStandardCost()
+    {
+        double cost = getArea() / SQUARE_FEET_PER_GALLON * STANDARD_PAINT_COST_PER_GALLON;
+        
+        return cost;
     }
 }

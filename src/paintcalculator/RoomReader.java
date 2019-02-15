@@ -18,8 +18,8 @@ import java.util.ArrayList;
  * @author Exile
  */
 public class RoomReader {
-    public static List<Room> readRooms(String fileName) throws FileNotFoundException, IOException, ClassNotFoundException{
-        List<Room> list = new ArrayList<Room>();
+    public static List<Paintable> readPaintable(String fileName) throws FileNotFoundException, IOException, ClassNotFoundException{
+        List<Paintable> list = new ArrayList<Paintable>();
         
         FileInputStream fis = new FileInputStream(fileName);
         ObjectInputStream ois = new ObjectInputStream(fis);
@@ -29,8 +29,8 @@ public class RoomReader {
             try
             {
                 Object obj = ois.readObject();
-                Room room = (Room)obj;
-                list.add(room);
+                Paintable item = (Paintable)obj;
+                list.add(item);
             }
             catch(EOFException eof)
             {

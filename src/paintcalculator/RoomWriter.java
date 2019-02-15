@@ -8,14 +8,14 @@ import java.io.ObjectOutputStream;
 import java.util.List;
 
 public class RoomWriter {
-    public void writeRooms(String fileName, List<Room> list) throws FileNotFoundException, IOException{
+    public void writePaintable(String fileName, List<Paintable> list) throws FileNotFoundException, IOException{
         FileOutputStream fos = new FileOutputStream(fileName);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         
         
-        for(Room room : list)
+        for(Paintable item : list)
         {
-            oos.writeObject(room);
+            oos.writeObject(item);
         }
         oos.close();
     }
